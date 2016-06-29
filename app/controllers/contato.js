@@ -5,11 +5,40 @@ var contatos = [
     {_id: 4,nome: 'Diego Wagner',email: 'diegowagner4@gmail.com'}
 ];
 
+const ID_CONTATO_INC = 4;
+
 module.exports = function() {
     var controller = {};
     controller.listarContatos = function(req, res) {
         res.json(contatos);
+    };
+
+    controller.salvaContato = function(req, res) {
+        var contato = req.body;
+        contato = contato._id ? atualiza(contato) : adiciona(contato);
+
+        res.json(contato);
+    };
+
+    function adiciona(contatoNovo) {
+
+        contatoNovo._id = ++ID_CONTATO_INC;
+        contatos.push(contatoNovo);
+
+        return contatoNovo;
+    };
+
+    function atualiza(contatoExistente) {
+
+        contatos = contatos.map(function() {
+            if(contato._id == contatoExistente._id) {
+                contato = contatoExistente;
+            }
+            return contato;
+        });
+        return contatoExistente;
     }
+
     controller.obtemContato = function(req, res) {
         var id = req.params.id;
         var contato = contatos.filter(function(contato){
@@ -18,13 +47,15 @@ module.exports = function() {
         contato ?
         res.json(contato) :
         res.status(404).send('Contato não encontrado.');
-    }
+    };
+
     controller.removeContato = function(req, res) {
         var idContato = req.params.id;
         contatos = contatos.filter(function(contato){
             return contato._id != idContato;
         });
         res.status(204).end();
-    }
+    };
+
     return controller;
 };
