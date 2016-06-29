@@ -30,7 +30,7 @@ module.exports = function() {
 
     function atualiza(contatoExistente) {
 
-        contatos = contatos.map(function() {
+        contatos = contatos.map(function(contato) {
             if(contato._id == contatoExistente._id) {
                 contato = contatoExistente;
             }
