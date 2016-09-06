@@ -4,7 +4,7 @@ var contatos = [
     {_id: 3,nome: 'Contato Exemplo 3',email: 'cont3@empresa.com.br'}
 ];
 
-const ID_CONTATO_INC = 4;
+const ID_CONTATO_INC = 3;
 
 module.exports = function() {
     var controller = {};
