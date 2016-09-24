@@ -1,8 +1,10 @@
 module.exports = function(app) {
 
-    var Contato = app.models.contato;
+    var Contato = app.models.Contato;
 
     var controller = {};
+
+    // Listar Contatos
     controller.listarContatos = function(req, res) {
 
         Contato.find().populate('emergencia').exec()
@@ -16,6 +18,7 @@ module.exports = function(app) {
             });
     };
 
+    // Salva Contato - Alteração e Criação
     controller.salvaContato = function(req, res) {
         var _id = req.body._id;
         var dados = { 
@@ -50,6 +53,7 @@ module.exports = function(app) {
         
     };
 
+    // Adicionar
     function adiciona(contatoNovo) {
 
         contatoNovo._id = ++ID_CONTATO_INC;
@@ -58,6 +62,7 @@ module.exports = function(app) {
         return contatoNovo;
     };
 
+    // Atualizar
     function atualiza(contatoExistente) {
 
         contatos = contatos.map(function(contato) {
@@ -69,6 +74,7 @@ module.exports = function(app) {
         return contatoExistente;
     }
 
+    // Obtem um contato
     controller.obtemContato = function(req, res) {
         var _id = req.params.id;
         var contato = Contato.findById(_id)
@@ -84,6 +90,7 @@ module.exports = function(app) {
         );
     };
 
+    // Remover contato
     controller.removeContato = function(req, res) {
         var _id = req.params.id;
 
