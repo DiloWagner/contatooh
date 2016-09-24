@@ -19,4 +19,6 @@ module.exports = function() {
             default: Date.now
         }
     });
+
+    return mongoose.model('Usuario', schema);
 }
