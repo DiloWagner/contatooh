@@ -26,7 +26,7 @@ module.exports = function() {
   }));
   app.use(passport.initialize());
   app.use(passport.session());
-  
+
   app.use(helmet.xframe()); // imposibilita o uso de iframes
   app.use(helmet.xssFilter()); // previne ataque de XSS
   app.use(helmet.nosniff()); // não permite que o browser infira no MIME type
@@ -36,5 +36,10 @@ module.exports = function() {
     .then('controllers')
     .then('routes')
     .into(app);
+  
+  app.get('*', function(req, res) {
+    res.status(404).render('404');  
+  });
+
   return app;
 };

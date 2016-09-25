@@ -1,3 +1,5 @@
+var sanitize = require('mongo-sanitize');
+
 module.exports = function(app) {
 
     var Contato = app.models.Contato;
@@ -39,7 +41,7 @@ module.exports = function(app) {
                     }
                 );
         } else {
-            Contato.create(req.body)
+            Contato.create(dados)
                 .then(
                     function(contato) {
                         res.status(201).json(contato);
@@ -92,7 +94,7 @@ module.exports = function(app) {
 
     // Remover contato
     controller.removeContato = function(req, res) {
-        var _id = req.params.id;
+        var _id = sanitize(req.params.id);
 
         Contato.remove({"_id" : _id}).exec()
             .then(
