@@ -26,8 +26,11 @@ module.exports = function() {
   }));
   app.use(passport.initialize());
   app.use(passport.session());
-
-  app.use(helmet());
+  
+  app.use(helmet.xframe()); // imposibilita o uso de iframes
+  app.use(helmet.xssFilter()); // previne ataque de XSS
+  app.use(helmet.nosniff()); // não permite que o browser infira no MIME type
+  app.disable('x-powered-by'); // não mostra a versão da tecnologia utilizada
 
   load('models', {cwd: 'app'})
     .then('controllers')
