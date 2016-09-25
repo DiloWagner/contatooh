@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var session    = require('express-session');
 var passport   = require('passport');
 var load       = require('express-load');
+var helmet     = require('helmet');
 
 module.exports = function() {
 
@@ -25,6 +26,8 @@ module.exports = function() {
   }));
   app.use(passport.initialize());
   app.use(passport.session());
+
+  app.use(helmet());
 
   load('models', {cwd: 'app'})
     .then('controllers')
