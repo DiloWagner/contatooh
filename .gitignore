@@ -28,6 +28,7 @@ node_modules
 public/vendor
 .tmp/
 dist/
+.env
 
 #IDE
 .vscode/
