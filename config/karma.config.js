@@ -24,6 +24,7 @@ module.exports = function(config) {
       'public/js/services/**/*.js',
       'public/js/directives/**/*.js',
       'test/spec/**/*Spec.js',
+      'test/e2e/**/*.js',
       'public/js/directives/meus-componentes/*.html'
     ],
 
